@@ -1,35 +1,36 @@
 /*
-===== ¹Ýº¹¹®: while =====
-ÇüÅÂ:
-	while(Á¶°Ç½Ä)
-		¼Ò½º ÄÚµå;
-µ¿ÀÛ °úÁ¤
-	1) ÄÄÇ»ÅÍ°¡ whileÀ» ¸¸³ª¸é whileÀÇ Á¶°Ç½ÄÀ» È®ÀÎ
-	2) Á¶°Ç½ÄÀÌ true(1)¸é while ¾È¿¡ ÀÖ´Â ¼Ò½º ÄÚµå°¡ ½ÇÇü
-	3. while ¾È¿¡ ÀÖ´Â ¼Ò½º ÄÚµå¸¦ ½ÇÇà½ÃÅ°´Ù while ÀÇ ³¡À» ¸¸³ª¸é ´Ù½Ã while·Î µ¹¾Æ°¨.
+===== ë°˜ë³µë¬¸ : while =====
+í˜•íƒœ:
+	while(ì¡°ê±´ì‹) {
+		ì†ŒìŠ¤ ì½”ë“œ;
+		}
+ë™ìž‘ ê³¼ì •
+	1) ì»´í“¨í„°ê°€ whileì„ ë§Œë‚˜ë©´ whileì˜ ì¡°ê±´ì‹ì„ í™•ì¸
+	2) ì¡°ê±´ì‹ì´ true(1)ë©´ while ì•ˆì— ìžˆëŠ” ì†ŒìŠ¤ ì½”ë“œê°€ ì‹¤í˜•
+	3) while ì•ˆì— ìžˆëŠ” ì†ŒìŠ¤ ì½”ë“œë¥¼ ì‹¤í–‰ì‹œí‚¤ë‹¤ while ì˜ ëì„ ë§Œë‚˜ë©´ ë‹¤ì‹œ whileë¡œ ëŒì•„ê°.
 */
 
 #include <stdio.h>
 
 int main() {
-	// countº¯¼ö°¡ 1ºÎÅÍ ½ÃÀÛÇØ¼­
+	// countë³€ìˆ˜ê°€ 1ë¶€í„° ì‹œìž‘í•´ì„œ
 	int count = 1;
 	
-	// countº¯¼ö°¡ 3 ÀÌÇÏÀÏ µ¿¾È
+	// countë³€ìˆ˜ê°€ 3 ì´í•˜ì¼ ë™ì•ˆ
 	while (count <= 3) {
 		printf("%d. Hello World!\n", count);
 		
-		// countº¯¼ö¸¦ ÇÏ³ª¾¿ Áõ°¡½ÃÅ°¸é¼­ while ¾ÈÀÇ ÄÚµå¸¦ ¹Ýº¹ÀûÀ¸·Î ½ÇÇà
+		// countë³€ìˆ˜ë¥¼ í•˜ë‚˜ì”© ì¦ê°€ì‹œí‚¤ë©´ì„œ while ì•ˆì˜ ì½”ë“œë¥¼ ë°˜ë³µì ìœ¼ë¡œ ì‹¤í–‰
 		count++;
 	}
 	
-	// num º¯¼ö°¡ 10ºÎÅÍ ½ÃÀÛÇØ¼­ ÇÏ³ª¾¿ °¨¼Ò
+	// num ë³€ìˆ˜ê°€ 10ë¶€í„° ì‹œìž‘í•´ì„œ í•˜ë‚˜ì”© ê°ì†Œ
 	int num = 10;
 	while (num >= 1) {
 		printf("num = %d\n", num);
 		num--;
 	}
-		// while º¯¼ö¸¦ ³ª¿ÔÀ» ¶§ numÀº 0
+		// while ë³€ìˆ˜ë¥¼ ë‚˜ì™”ì„ ë•Œ numì€ 0
 
 	return 0;
 }
