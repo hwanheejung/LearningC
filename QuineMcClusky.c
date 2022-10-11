@@ -86,32 +86,32 @@ int main() {
     int oi, ni, on, nn;
 
     printf("num of variables: ");
-    scanf_s("%d", &n);
+    scanf("%d", &n);
     n2 = (int)pow(3, n);
     getchar(); // becuase of new line..
 
     /* init buffer for quine mccluskey algorithm. */
 
     /*
-        ** µ¿ÀûÇÒ´ç º¯¼ö ¼³¸í **
+        ** ë™ì í• ë‹¹ ë³€ìˆ˜ ì„¤ëª… **
         1. old/new
-            old = truth valueµéÀ» ºñ±³ÇÏ±â Àü µ¥ÀÌÅÍ
-            new = truth valueµéÀ» ºñ±³ÇÑ ÀÌÈÄÀÇ µ¥ÀÌÅÍ ( '-'¸¦ Æ÷ÇÔÇÔ )
+            old = truth valueë“¤ì„ ë¹„êµí•˜ê¸° ì „ ë°ì´í„°
+            new = truth valueë“¤ì„ ë¹„êµí•œ ì´í›„ì˜ ë°ì´í„° ( '-'ë¥¼ í¬í•¨í•¨ )
                 old[i][j][k]
-                    i = 1ÀÇ °¹¼ö
-                    j = truth valueÀÇ interger°ª. ÃÖ´ë 2^n±îÁö °¡´ÉÇÔ. ´Ù¸¸, '-'Ç¥½Ã¸¦ ¿©±â¼± ¼ýÀÚ 2·Î ÇÏ±â ¶§¹®¿¡, Å©±â´Â 3^nÀ» ÇÒ´çÇÔ.
-                    k = ºñÆ® ¼ö 0~nÀÌ´Ù.
-                    ÀÌ·¸°Ô [i][j][k]´Â 1À» i°³ °¡Áö°í ÀÖ´Â truth value j¿¡ ´ëÇÑ k¹øÂ° bit°ªÀÌ¶ó°í º¸¸é µÈ´Ù.
-                newµµ ¸¶Âù°¡Áö´Ù.
+                    i = 1ì˜ ê°¯ìˆ˜
+                    j = truth valueì˜ intergerê°’. ìµœëŒ€ 2^nê¹Œì§€ ê°€ëŠ¥í•¨. ë‹¤ë§Œ, '-'í‘œì‹œë¥¼ ì—¬ê¸°ì„  ìˆ«ìž 2ë¡œ í•˜ê¸° ë•Œë¬¸ì—, í¬ê¸°ëŠ” 3^nì„ í• ë‹¹í•¨.
+                    k = ë¹„íŠ¸ ìˆ˜ 0~nì´ë‹¤.
+                    ì´ë ‡ê²Œ [i][j][k]ëŠ” 1ì„ iê°œ ê°€ì§€ê³  ìžˆëŠ” truth value jì— ëŒ€í•œ kë²ˆì§¸ bitê°’ì´ë¼ê³  ë³´ë©´ ëœë‹¤.
+                newë„ ë§ˆì°¬ê°€ì§€ë‹¤.
         2. oldIdx/newIdx
-            oldIdx[i] 1ÀÇ °¹¼ö°¡ i°³ÀÎ º¯¼öÀÇ °¹¼ö.
-            newIdx[i] 1ÀÇ °¹¼ö°¡ i°³ÀÎ º¯¼öÀÇ °¹¼ö.
+            oldIdx[i] 1ì˜ ê°¯ìˆ˜ê°€ iê°œì¸ ë³€ìˆ˜ì˜ ê°¯ìˆ˜.
+            newIdx[i] 1ì˜ ê°¯ìˆ˜ê°€ iê°œì¸ ë³€ìˆ˜ì˜ ê°¯ìˆ˜.
         3. used[i][j]
-            1ÀÇ °¹¼ö°¡ i°³ÀÎ j¹øÂ° º¯¼ö°¡ ºñ±³¿¡ 1¹øÀÌ¶óµµ »ç¿ë µÇ¾ú´Â°¡? ¸¦ ÀúÀåÇÏ´Â °ª.
-            Áï ºñÆ®°¡ 1°³¸¸ ´Þ¶ó ºñ±³°¡ °¡´ÉÇÑ oldÀÇ µÎ °ªÀº used°ªÀÌ 1ÀÏ °ÍÀÌ°í, ±×·¸Áö ¾ÊÀº °ªµéÀº ¸ðµÎ 0ÀÌ´Ù.
-            ºñÆ® ºñ±³ ÈÄ ÀÌ °ªÀÌ 0ÀÌ¶ó¸é primeÀÌ¶ó´Â ¶æÀÌ´Ù.
+            1ì˜ ê°¯ìˆ˜ê°€ iê°œì¸ jë²ˆì§¸ ë³€ìˆ˜ê°€ ë¹„êµì— 1ë²ˆì´ë¼ë„ ì‚¬ìš© ë˜ì—ˆëŠ”ê°€? ë¥¼ ì €ìž¥í•˜ëŠ” ê°’.
+            ì¦‰ ë¹„íŠ¸ê°€ 1ê°œë§Œ ë‹¬ë¼ ë¹„êµê°€ ê°€ëŠ¥í•œ oldì˜ ë‘ ê°’ì€ usedê°’ì´ 1ì¼ ê²ƒì´ê³ , ê·¸ë ‡ì§€ ì•Šì€ ê°’ë“¤ì€ ëª¨ë‘ 0ì´ë‹¤.
+            ë¹„íŠ¸ ë¹„êµ í›„ ì´ ê°’ì´ 0ì´ë¼ë©´ primeì´ë¼ëŠ” ëœ»ì´ë‹¤.
         4. prime
-            ÃÖÁ¾ÀûÀ¸·Î primeÀÎ °ªµéÀ» ÀúÀåÇÏ´Â °ø°£
+            ìµœì¢…ì ìœ¼ë¡œ primeì¸ ê°’ë“¤ì„ ì €ìž¥í•˜ëŠ” ê³µê°„
     */
     old = (int***)malloc(sizeof(int**) * (n + 1)); // cnt of '1'
     new = (int***)malloc(sizeof(int**) * (n + 1));
@@ -171,9 +171,9 @@ int main() {
     /* for loop for quine mccluskey algorithm */
     /* no more possible substitution case, program ended. */
 
-    /* 1. ºñ±³ È½¼ö´Â ÃÖ´ë 1ÀÇ °¹¼ö¸¦ µû¶ó°£´Ù. µû¶ó¼­ n¹øºÎÅÍ 0¹ø±îÁö */
+    /* 1. ë¹„êµ íšŸìˆ˜ëŠ” ìµœëŒ€ 1ì˜ ê°¯ìˆ˜ë¥¼ ë”°ë¼ê°„ë‹¤. ë”°ë¼ì„œ në²ˆë¶€í„° 0ë²ˆê¹Œì§€ */
     for (ii = n; ii >= 0; ii--) {
-        /* 1.1 ÀÌ ºÎºÐ¿¡¼­ ÃÊ±âÈ­¸¦ ÁøÇàÇÑ´Ù. */
+        /* 1.1 ì´ ë¶€ë¶„ì—ì„œ ì´ˆê¸°í™”ë¥¼ ì§„í–‰í•œë‹¤. */
         /* copy new to old */
         init(old, oldIdx, n, n2);
         for (i = 0; i <= n; i++) {
@@ -186,47 +186,47 @@ int main() {
         /* init new */
         init(new, newIdx, n, n2);
 
-        /* 2. ÃÖ´ë 1ÀÇ °¹¼ö°¡ n°³ÀÏ ¶§ ºÎÅÍ 0°³ÀÏ ¶§ ±îÁö ºñ±³¸¦ ÁøÇàÇÑ´Ù. */
+        /* 2. ìµœëŒ€ 1ì˜ ê°¯ìˆ˜ê°€ nê°œì¼ ë•Œ ë¶€í„° 0ê°œì¼ ë•Œ ê¹Œì§€ ë¹„êµë¥¼ ì§„í–‰í•œë‹¤. */
         for (i = n; i >= 0; i--) {
-            /* 2.1 ºñ±³´Â i¿Í i-1¸¦ ºñ±³ÇÑ´Ù. i == 0ÀÏ ¶© µû·Î Ã³¸®µÈ´Ù.*/
+            /* 2.1 ë¹„êµëŠ” iì™€ i-1ë¥¼ ë¹„êµí•œë‹¤. i == 0ì¼ ë• ë”°ë¡œ ì²˜ë¦¬ëœë‹¤.*/
             if (i == 0) {
                 for (j = 0; j < oldIdx[i]; j++) {
-                    /* Áö±Ý±îÁö »ç¿ëµÇÁö ¾Ê¾Ò´Ù¸é prime. */
+                    /* ì§€ê¸ˆê¹Œì§€ ì‚¬ìš©ë˜ì§€ ì•Šì•˜ë‹¤ë©´ prime. */
                     if (used[i][j] == 0 && is_exist(prime, old[i][j], primeIdx, n) == 0)
                         bit_copy(prime[primeIdx++], old[i][j], n);
                 }
                 continue;
             }
-            /* 2.2 i > 0ÀÌ¶ó¸é, 1ÀÇ °¹¼ö°¡ i°³, i-1°³ÀÎ ±×·ì¿¡ ´ëÇØ¼­ ºñ±³ÇÑ´Ù.*/
-            /* j´Â i°³ÀÎ truth valuesµéÀ» ³ªÅ¸³»°í, k´Â i-1°³ÀÎ truth valueµéÀ» ³ªÅ¸³½´Ù. */
+            /* 2.2 i > 0ì´ë¼ë©´, 1ì˜ ê°¯ìˆ˜ê°€ iê°œ, i-1ê°œì¸ ê·¸ë£¹ì— ëŒ€í•´ì„œ ë¹„êµí•œë‹¤.*/
+            /* jëŠ” iê°œì¸ truth valuesë“¤ì„ ë‚˜íƒ€ë‚´ê³ , këŠ” i-1ê°œì¸ truth valueë“¤ì„ ë‚˜íƒ€ë‚¸ë‹¤. */
             for (j = 0; j < oldIdx[i]; j++) {
                 int check = 0;
 
                 for (k = 0; k < oldIdx[i - 1]; k++) {
-                    /* ºñÆ®ÀÇ Â÷ÀÌ°¡ 1¹Û¿¡ ¾È³¯°æ¿ì */
+                    /* ë¹„íŠ¸ì˜ ì°¨ì´ê°€ 1ë°–ì— ì•ˆë‚ ê²½ìš° */
                     if (bit_difference(old[i][j], old[i - 1][k], n) == 1) {
-                        /* ÇØ´ç ºñÆ®¸¦ 2·Î ¹Ù²Ù¾î new¿¡ ÀúÀåÇÑ´Ù.*/
+                        /* í•´ë‹¹ ë¹„íŠ¸ë¥¼ 2ë¡œ ë°”ê¾¸ì–´ newì— ì €ìž¥í•œë‹¤.*/
                         bit_change(old[i][j], old[i - 1][k], new[i - 1][newIdx[i - 1]], n);
 
-                        /* °ªÀÌ ÀÖÀ» ¶§¸¸ ³Ö´Â´Ù. */
+                        /* ê°’ì´ ìžˆì„ ë•Œë§Œ ë„£ëŠ”ë‹¤. */
                         if (is_exist(new[i - 1], new[i - 1][newIdx[i - 1]], newIdx[i - 1], n) == 0) {
                             newIdx[i - 1]++;
                         }
 
-                        /* oldµéÀÌ »ç¿ëµÊÀ» Ã¼Å©ÇÑ´Ù.*/
+                        /* oldë“¤ì´ ì‚¬ìš©ë¨ì„ ì²´í¬í•œë‹¤.*/
                         used[i][j] = 1;
                         used[i - 1][k] = 1;
 
-                        /* new¿¡ °ªÀÌ ÇÏ³ª Ãß°¡µÇ¾úÀ¸¹Ç·Î, Idx°ªµµ 1°³ ¿Ã·ÁÁØ´Ù.*/
+                        /* newì— ê°’ì´ í•˜ë‚˜ ì¶”ê°€ë˜ì—ˆìœ¼ë¯€ë¡œ, Idxê°’ë„ 1ê°œ ì˜¬ë ¤ì¤€ë‹¤.*/
 
-                        /* old[i][j]°ªÀÌ ºñ±³¿¡ »ç¿ëµÇ¾ú´Â Áö¸¦ Ã¼Å©ÇÑ´Ù.*/
+                        /* old[i][j]ê°’ì´ ë¹„êµì— ì‚¬ìš©ë˜ì—ˆëŠ” ì§€ë¥¼ ì²´í¬í•œë‹¤.*/
                         check++;
                     }
                 }
 
-                /* old[i][j]°ªÀÌ ´Ü ÇÑ¹øµµ »ç¿ëµÇÁö ¾Ê¾Ò´Ù¸é? */
+                /* old[i][j]ê°’ì´ ë‹¨ í•œë²ˆë„ ì‚¬ìš©ë˜ì§€ ì•Šì•˜ë‹¤ë©´? */
                 if (check == 0 && used[i][j] == 0) {
-                    /* prime¿¡ ÀÌ¹Ì ÀÖ´Â °ªÀÌ ¾Æ´Ï¶ó¸é ÀÌ °ªÀº primeÀÌ´Ù. */
+                    /* primeì— ì´ë¯¸ ìžˆëŠ” ê°’ì´ ì•„ë‹ˆë¼ë©´ ì´ ê°’ì€ primeì´ë‹¤. */
                     if (is_exist(prime, old[i][j], primeIdx, n) == 0)
                         bit_copy(prime[primeIdx++], old[i][j], n);
                 }
