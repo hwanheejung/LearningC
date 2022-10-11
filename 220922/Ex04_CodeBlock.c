@@ -7,8 +7,8 @@ int main() {
 	int score;
 	scanf_s("%d", &score);
 	
-	// if¹®ÀÇ Á¶°Ç½ÄÀÌ trueÀÏ ¶§ µ¿ÀÛÇÒ ÄÚµå´Â ±âº»ÀûÀ¸·Î µü ÇÑ ÁÙ¸¸ °¡´É. 
-	// code block {} : ¿©·¯ ÁÙÀÇ ÄÚµå¸¦ ¹­¾îÁÜ
+	// ifë¬¸ì˜ ì¡°ê±´ì‹ì´ trueì¼ ë•Œ ë™ì‘í•  ì½”ë“œëŠ” ê¸°ë³¸ì ìœ¼ë¡œ ë”± í•œ ì¤„ë§Œ ê°€ëŠ¥. 
+	// code block {} : ì—¬ëŸ¬ ì¤„ì˜ ì½”ë“œë¥¼ ë¬¶ì–´ì¤Œ
 	if (score < 0 || score > 100) {
 		printf("you entered the wrong score.\n");
 		printf("The score should be between 0 and 100\n");
