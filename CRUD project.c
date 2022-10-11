@@ -1,48 +1,64 @@
 /*
 CRUD project
-Create(È¸¿ø°¡ÀÔ) / Read(È¸¿øÁ¤º¸ Á¶È¸) / Update(È¸¿øÁ¤º¸ º¯°æ) / Delete(È¸¿øÁ¤º¸ »èÁ¦)
+Create(íšŒì›ê°€ì…) / Read(íšŒì›ì •ë³´ ì¡°íšŒ) / Update(íšŒì›ì •ë³´ ë³€ê²½) / Delete(íšŒì›ì •ë³´ ì‚­ì œ)
 << before Log-in >>
--> Log-in : È¸¿ø°¡ÀÔ ½Ã ÀÔ·ÂÇß´ø ¾ÆÀÌµğ¿Í ºñ¹øÀ» ÀÔ·ÂÇÏ°í ¸ÂÀ¸¸é ¼º°ø, Æ²¸®¸é ½ÇÆĞ
--> Sign-up : È¸¿ø Á¤º¸¸¦ ÇÁ·Î±×·¥¿¡ ÀúÀåÇÏ´Â °Í
+-> Log-in : íšŒì›ê°€ì… ì‹œ ì…ë ¥í–ˆë˜ ì•„ì´ë””ì™€ ë¹„ë²ˆì„ ì…ë ¥í•˜ê³  ë§ìœ¼ë©´ ì„±ê³µ, í‹€ë¦¬ë©´ ì‹¤íŒ¨
+-> Sign-up : íšŒì› ì •ë³´ë¥¼ í”„ë¡œê·¸ë¨ì— ì €ì¥í•˜ëŠ” ê²ƒ
 -> Forgot ID?
 -> Forgot PW?
 
 << after Log-in>>
 -> Member Information Inquiry
--> Change info : ±âÁ¸ÀÇ È¸¿ø Á¤º¸¿¡ »õ·Î¿î È¸¿ø Á¤º¸¸¦ µ¤¾î¾º¿ì´Â °Í (update)
--> Delete account : Å»ÅğÇÒ È¸¿øÀÇ Á¤º¸ »èÁ¦ / °æ¿ì¿¡ µû¶ó¼­ Å»Åğ ÀÌÈÄ¿¡ ÀÖ´Â ¸ğµç È¸¿øµéÀÇ Á¤º¸¸¦ ¾ÕÀ¸·Î ÇÑ Ä­¾¿ ´ç±è.(°ø°£³¶ºñ)
-											  ´ç°Ü¾ßµÇ´Â »óÈ²: ¼±Çü¸®½ºÆ®¸¦ »ç¿ëÇØ¼­ µ¥ÀÌÅÍ¸¦ ÀúÀåÇßÀ» °æ¿ì
+-> Change info : ê¸°ì¡´ì˜ íšŒì› ì •ë³´ì— ìƒˆë¡œìš´ íšŒì› ì •ë³´ë¥¼ ë®ì–´ì”Œìš°ëŠ” ê²ƒ (update)
+-> Delete account : íƒˆí‡´í•  íšŒì›ì˜ ì •ë³´ ì‚­ì œ / ê²½ìš°ì— ë”°ë¼ì„œ íƒˆí‡´ ì´í›„ì— ìˆëŠ” ëª¨ë“  íšŒì›ë“¤ì˜ ì •ë³´ë¥¼ ì•ìœ¼ë¡œ í•œ ì¹¸ì”© ë‹¹ê¹€.(ê³µê°„ë‚­ë¹„)
+											  ë‹¹ê²¨ì•¼ë˜ëŠ” ìƒí™©: ì„ í˜•ë¦¬ìŠ¤íŠ¸ë¥¼ ì‚¬ìš©í•´ì„œ ë°ì´í„°ë¥¼ ì €ì¥í–ˆì„ ê²½ìš°
 -> Log-out
 */
 
 
 #include <stdio.h>
-#include <string.h>		
+#include <string.h>	
+
+#define TRUE 1
+#define FALSE 0
+
+// after log-in
+#define MEMBER_INFO_INQUIRY 1
+#define CHANGE_INFO 2
+#define DELETE_ACCOUNT 3
+#define LOG_OUT 4 
+#define END 5
+
+// before log-in
+#define LOG_IN 1
+#define SIGN_UP 2
+#define FIND_ID 3
+#define FIND_PW 4
 
 int main() {
-	int running = 1;	// runningÀº whileÀÇ Á¶°Ç½ÄÀ¸·Î º¯¼öÀÌ¹Ç·Î 1ÀÌ ¾Æ´Ñ true¸¦ ÀúÀåÇÏ´Â °Í
+	int running = TRUE;	// runningì€ whileì˜ ì¡°ê±´ì‹ìœ¼ë¡œ ë³€ìˆ˜ì´ë¯€ë¡œ 1ì´ ì•„ë‹Œ trueë¥¼ ì €ì¥í•˜ëŠ” ê²ƒ
 
-	char idList[3][10];		// 3¸í °¢ÀÚ 9ÀÚ¾¿
-	char pwList[3][13];		// 3¸í °¢ÀÚ 12ÀÚ¾¿
-	char nameList[3][7];	// 3¸í °¢ÀÚ 6ÀÚ¾¿ (ÇÑ±Û 3ÀÚ)
+	char idList[3][10];		// 3ëª… ê°ì 9ìì”©
+	char pwList[3][13];		// 3ëª… ê°ì 12ìì”©
+	char nameList[3][7];	// 3ëª… ê°ì 6ìì”© (í•œê¸€ 3ì)
 
 	char id[10];
 	char pw[13];
 	char name[7];
 
-	int members = 0;		// ÇöÀç °¡ÀÔÇÑ È¸¿øÀÇ ¼ö and sign-up ½Ã ¸î ¹ø ÀÎµ¦½º¿¡ È¸¿øÁ¤º¸¸¦ ÀúÀåÇÒÁö °áÁ¤ÇÒ °ª
+	int members = 0;		// í˜„ì¬ ê°€ì…í•œ íšŒì›ì˜ ìˆ˜ and sign-up ì‹œ ëª‡ ë²ˆ ì¸ë±ìŠ¤ì— íšŒì›ì •ë³´ë¥¼ ì €ì¥í• ì§€ ê²°ì •í•  ê°’
 	int exist;
 
-	int loginSuccess = 0;		// ·Î±×ÀÎ ¼º°ø ¿©ºÎ
-	char loginUserName[14];		// ·Î±×ÀÎ ¼º°øÇßÀ» ¶§ ·Î±×ÀÎÇÑ °èÁ¤ ÀÌ¸§
+	int loginSuccess = 0;		// ë¡œê·¸ì¸ ì„±ê³µ ì—¬ë¶€
+	char loginUserName[14];		// ë¡œê·¸ì¸ ì„±ê³µí–ˆì„ ë•Œ ë¡œê·¸ì¸í•œ ê³„ì • ì´ë¦„
 
 	while (running) {
 		printf("\n========================\n");
 		printf("===== CRUD project =====\n");
 
-		if (loginSuccess == 1) {
-			// ·Î±×ÀÎ ¼º°ø ½Ã ·Î±×ÀÎ ÈÄ È­¸é Ãâ·Â
-			// ±×¿¡ ¸Â´Â ±â´ÉÀÌ µ¿ÀÛÇÏµµ·Ï ÄÚµå¸¦ ±¸¼º
+		if (loginSuccess == TRUE) {
+			// ë¡œê·¸ì¸ ì„±ê³µ ì‹œ ë¡œê·¸ì¸ í›„ í™”ë©´ ì¶œë ¥
+			// ê·¸ì— ë§ëŠ” ê¸°ëŠ¥ì´ ë™ì‘í•˜ë„ë¡ ì½”ë“œë¥¼ êµ¬ì„±
 			printf("Welcome %s!\n", loginUserName);
 			printf("\n<< After logged-in >>\n");
 			printf("1. Member Information Inquiry\n");
@@ -56,13 +72,13 @@ int main() {
 			scanf_s("%d", &menu);
 
 			switch (menu) {
-			case 1:
+			case MEMBER_INFO_INQUIRY:
 				printf("\n<< Member Information Inquiry >>\n");
-				// n¹øÂ° °èÁ¤ºÎÅÍ ¸¶Áö¸· °èÁ¤±îÁö Â÷·Ê´ë·Î Á¢±ÙÇØ¼­
-				// n¹øÂ° °èÁ¤ÀÇ ¾ÆÀÌµğ, ºñ¹ø, ÀÌ¸§ Ãâ·Â
+				// në²ˆì§¸ ê³„ì •ë¶€í„° ë§ˆì§€ë§‰ ê³„ì •ê¹Œì§€ ì°¨ë¡€ëŒ€ë¡œ ì ‘ê·¼í•´ì„œ
+				// në²ˆì§¸ ê³„ì •ì˜ ì•„ì´ë””, ë¹„ë²ˆ, ì´ë¦„ ì¶œë ¥
 
 				for (int i = 0; i < members; i++) {
-					printf("\n<< %d¹øÂ° È¸¿ø °èÁ¤ Á¤º¸ >>\n", i + 1);
+					printf("\n<< %dë²ˆì§¸ íšŒì› ê³„ì • ì •ë³´ >>\n", i + 1);
 					printf("ID => %s\n", idList[i]);
 					printf("PW => %s\n", pwList[i]);
 					printf("NAME => %s\n", nameList[i]);
@@ -70,24 +86,24 @@ int main() {
 
 				break;
 
-			case 2:
+			case CHANGE_INFO:
 				printf("\n<< Change info >>\n");
 
-				// Á¤º¸¸¦ º¯°æÇÒ È¸¿øÀÇ ¾ÆÀÌµğ¸¦ ÀÔ·Â¹Ş´Â´Ù
+				// ì •ë³´ë¥¼ ë³€ê²½í•  íšŒì›ì˜ ì•„ì´ë””ë¥¼ ì…ë ¥ë°›ëŠ”ë‹¤
 				printf("Enter your ID => ");
 				scanf_s("%s", id, 10);
-				
-				// ÇØ´ç ¾ÆÀÌµğÀÇ °èÁ¤ÀÌ ÀÖ´ÂÁö Ã£´Â´Ù
-				exist = 0;
+
+				// í•´ë‹¹ ì•„ì´ë””ì˜ ê³„ì •ì´ ìˆëŠ”ì§€ ì°¾ëŠ”ë‹¤
+				exist = FALSE;
 				for (int i = 0; i < members; i++) {
 					if (strcmp(idList[i], id) == 0) {
-						exist = 1;
+						exist = TRUE;
 					}
 				}
 
 				if (exist) {
-				// ÀÖ´Ù¸é º¯°æÇÒ ºñ¹øÀ» ÀÔ·Â¹Ş´Â´Ù / º¯°æÇÒ ÀÌ¸§À» ÀÔ·Â¹Ş´Â´Ù
-				// ÇØ´ç ¾ÆÀÌµğÀÇ °èÁ¤ ºñ¹ø, ÀÌ¸§À» º¯°æÇÒ ºñ¹ø, ÀÌ¸§À¸·Î ¹Ù²Û´Ù. 
+					// ìˆë‹¤ë©´ ë³€ê²½í•  ë¹„ë²ˆì„ ì…ë ¥ë°›ëŠ”ë‹¤ / ë³€ê²½í•  ì´ë¦„ì„ ì…ë ¥ë°›ëŠ”ë‹¤
+					// í•´ë‹¹ ì•„ì´ë””ì˜ ê³„ì • ë¹„ë²ˆ, ì´ë¦„ì„ ë³€ê²½í•  ë¹„ë²ˆ, ì´ë¦„ìœ¼ë¡œ ë°”ê¾¼ë‹¤. 
 					printf("New password => ");
 					scanf_s("%s", pw, 13);
 
@@ -103,32 +119,32 @@ int main() {
 					}
 				}
 				else {
-				// ¾ø´Ù¸é "°èÁ¤ Á¤º¸°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù" Ãâ·Â
+					// ì—†ë‹¤ë©´ "ê³„ì • ì •ë³´ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤" ì¶œë ¥
 					printf("Your account does not exist\n");
 				}
-				
+
 				break;
 
-			case 3:
+			case DELETE_ACCOUNT:
 				printf("\n<< Delete Account >>\n");
-				
-				// Å»ÅğÇÒ È¸¿øÀÇ ¾ÆÀÌµğ¸¦ ÀÔ·Â¹Ş´Â´Ù.
+
+				// íƒˆí‡´í•  íšŒì›ì˜ ì•„ì´ë””ë¥¼ ì…ë ¥ë°›ëŠ”ë‹¤.
 				printf("ID => ");
 				scanf_s("%s", id, 10);
 
-				// ÇØ´ç ¾ÆÀÌµğÀÇ °èÁ¤ÀÌ ÀÖ´ÂÁö Á¶È¸ÇÑ´Ù.
-				exist = 0;
+				// í•´ë‹¹ ì•„ì´ë””ì˜ ê³„ì •ì´ ìˆëŠ”ì§€ ì¡°íšŒí•œë‹¤.
+				exist = FALSE;
 				for (int i = 0; i < members; i++) {
 					if (strcmp(idList[i], id) == 0) {
-						exist = 1;
+						exist = TRUE;
 					}
 				}
 
 				if (exist) {
-					// ÀÖ´Ù¸é
-					// È¸¿ø Á¤º¸ »èÁ¦
+					// ìˆë‹¤ë©´
+					// íšŒì› ì •ë³´ ì‚­ì œ
 
-					// Å»ÅğÇÏ·Á´Â ´ÙÀ½ È¸¿øÀÇ Á¤º¸ºÎÅÍ ¸¶Áö¸· È¸¿øÀÇ Á¤º¸¸¦ ¾ÕÀ¸·Î ÇÑ Ä­¾¿ ´ç±ä´Ù.
+					// íƒˆí‡´í•˜ë ¤ëŠ” ë‹¤ìŒ íšŒì›ì˜ ì •ë³´ë¶€í„° ë§ˆì§€ë§‰ íšŒì›ì˜ ì •ë³´ë¥¼ ì•ìœ¼ë¡œ í•œ ì¹¸ì”© ë‹¹ê¸´ë‹¤.
 					for (int i = 0; i < members; i++) {
 						if (strcmp(idList[i], id) == 0) {
 							for (int x = i + 1; x < members; x++) {
@@ -141,22 +157,22 @@ int main() {
 					members--;
 				}
 				else {
-					// ¾ø´Ù¸é
-					// °èÁ¤ Á¤º¸°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù Ãâ·Â
+					// ì—†ë‹¤ë©´
+					// ê³„ì • ì •ë³´ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤ ì¶œë ¥
 					printf("Your account does not exist.\n");
 				}
-				
+
 				break;
 
-			case 4:
+			case LOG_OUT:
 				printf("\n<< Log-out >>\n");
-				loginSuccess = 0;
+				loginSuccess = FALSE;
 
 				break;
 
-			case 5:
+			case END:
 				printf("\n<< Leave this program >>\n");
-				running = 0;
+				running = FALSE;
 				break;
 
 			default:
@@ -166,9 +182,9 @@ int main() {
 
 		}
 		else {
-			// ·Î±×ÀÎ ½ÇÆĞÇß´Ù¸é
-			// ±âÁ¸Ã³·³ ·Î±×ÀÎ Àü È­¸é Ãâ·Â,
-			// ±×¿¡ ¸Â´Â ±â´ÉÀÌ µ¿ÀÛÇÏµµ·Ï ÄÚµå¸¦ ±¸¼º
+			// ë¡œê·¸ì¸ ì‹¤íŒ¨í–ˆë‹¤ë©´
+			// ê¸°ì¡´ì²˜ëŸ¼ ë¡œê·¸ì¸ ì „ í™”ë©´ ì¶œë ¥,
+			// ê·¸ì— ë§ëŠ” ê¸°ëŠ¥ì´ ë™ì‘í•˜ë„ë¡ ì½”ë“œë¥¼ êµ¬ì„±
 			printf("<< before Log-in >>\n");
 			printf("1. Log-in\n");
 			printf("2. Sign-up\n");
@@ -181,7 +197,7 @@ int main() {
 			scanf_s("%d", &menu);
 
 			switch (menu) {
-			case 1:
+			case LOG_IN:
 				printf("\n<< Log-in >>\n");
 
 				printf("Enter your ID => ");
@@ -189,15 +205,15 @@ int main() {
 				printf("Enter your password => ");
 				scanf_s("%s", pw, 13);
 
-				exist = 0;	// ÀÏÄ¡ÇÏ´Â °èÁ¤ÀÌ ÀÖ´ÂÁö ¿©ºÎ
+				exist = FALSE;	// ì¼ì¹˜í•˜ëŠ” ê³„ì •ì´ ìˆëŠ”ì§€ ì—¬ë¶€
 
-				// idList ¾È¿¡ ÀÔ·ÂÇÑ ¾ÆÀÌµğ°¡ ÀÖ´ÂÁö È®ÀÎ AND  pwList¿¡ pw ÀÖ´ÂÁöµµ È®ÀÎ 
-				// => µÑ´Ù ÀÖÀ¸¸é true·Î ¼³Á¤ (exist = 1)
+				// idList ì•ˆì— ì…ë ¥í•œ ì•„ì´ë””ê°€ ìˆëŠ”ì§€ í™•ì¸ AND  pwListì— pw ìˆëŠ”ì§€ë„ í™•ì¸ 
+				// => ë‘˜ë‹¤ ìˆìœ¼ë©´ trueë¡œ ì„¤ì • (exist = 1)
 				for (int i = 0; i < 3; i++) {
-					// strcmp(A, B) => ¹®ÀÚ¿­ A¿Í ¹®ÀÚ¿­ B°¡ °°´Ù¸é 0 , ´Ù¸£¸é 0ÀÌ ¾Æ´Ñ °ª
+					// strcmp(A, B) => ë¬¸ìì—´ Aì™€ ë¬¸ìì—´ Bê°€ ê°™ë‹¤ë©´ 0 , ë‹¤ë¥´ë©´ 0ì´ ì•„ë‹Œ ê°’
 					if (strcmp(idList[i], id) == 0 && strcmp(pwList[i], pw) == 0) {
-						exist = 1;
-						loginSuccess = 1;
+						exist = TRUE;
+						loginSuccess = TRUE;
 						strcpy_s(loginUserName, sizeof(nameList[i]), nameList[i]);
 
 					} /* TEST CASE
@@ -209,7 +225,7 @@ int main() {
 
 				}
 
-				// ÀÖÀ¸¸é ¼º°ø, ¾øÀ¸¸é ½ÇÆĞ
+				// ìˆìœ¼ë©´ ì„±ê³µ, ì—†ìœ¼ë©´ ì‹¤íŒ¨
 				if (exist) {
 					printf("You're logged-in!\n");
 				}
@@ -220,18 +236,18 @@ int main() {
 
 				break;
 
-			case 2:
+			case SIGN_UP:
 				printf("\n<< Sign-up >>\n");
 
-				exist = 0;
-				// ¾ÆÀÌµğ¸¦ ÀÔ·Â¹Ş´Â´Ù.
+				exist = FALSE;
+				// ì•„ì´ë””ë¥¼ ì…ë ¥ë°›ëŠ”ë‹¤.
 				printf("ID => ");
-				scanf_s("%s", id, 10);		// ¹è¿­¿¡ ÀúÀåÇÒ ¶§´Â &¸¦ ¾²Áö ¾Ê´Â´Ù.
+				scanf_s("%s", id, 10);		// ë°°ì—´ì— ì €ì¥í•  ë•ŒëŠ” &ë¥¼ ì“°ì§€ ì•ŠëŠ”ë‹¤.
 
-				// »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ ¾ÆÀÌµğ°¡ °¡ÀÔÇÑ È¸¿ø Áß¿¡ Á¸ÀçÇÏ´ÂÁö Ã£´Â´Ù.
+				// ì‚¬ìš©ìê°€ ì…ë ¥í•œ ì•„ì´ë””ê°€ ê°€ì…í•œ íšŒì› ì¤‘ì— ì¡´ì¬í•˜ëŠ”ì§€ ì°¾ëŠ”ë‹¤.
 				for (int i = 0; i < 3; i++) {
 					if (strcmp(idList[i], id) == 0) {
-						exist = 1;
+						exist = TRUE;
 					}
 				}
 
@@ -240,9 +256,9 @@ int main() {
 				}
 				else { // if not exists,
 					/*
-					¹®ÀÚ¿­ÀÇ °æ¿ì, ´Ù¸¥ µ¥ÀÌÅÍ Å¸ÀÔ°ú ¸¹ÀÌ ´Ù¸£°Ô µ¿ÀÛÇÔ.
-					¹è¿­ ¾È¿¡ ¹®ÀÚ¿­À» ÀúÀåÇÒ ¶§´Â strcpy_s(B, sizeof(A), A)¸¦ »ç¿ë
-					=> A¸¦ B¿¡ º¹»ç
+					ë¬¸ìì—´ì˜ ê²½ìš°, ë‹¤ë¥¸ ë°ì´í„° íƒ€ì…ê³¼ ë§ì´ ë‹¤ë¥´ê²Œ ë™ì‘í•¨.
+					ë°°ì—´ ì•ˆì— ë¬¸ìì—´ì„ ì €ì¥í•  ë•ŒëŠ” strcpy_s(B, sizeof(A), A)ë¥¼ ì‚¬ìš©
+					=> Aë¥¼ Bì— ë³µì‚¬
 					*/
 					strcpy_s(idList[members], sizeof(id), id);
 
@@ -258,20 +274,20 @@ int main() {
 				}
 				break;
 
-			case 3:
+			case FIND_ID:
 				printf("\n<< Find your ID >>\n");
-				// ÀÌ¸§À» ÀÔ·Â¹Ş´Â´Ù.
+				// ì´ë¦„ì„ ì…ë ¥ë°›ëŠ”ë‹¤.
 				printf("Enter your name => ");
 				scanf_s("%s", name, 7);
 
-				// ÀÔ·Â¹ŞÀº ÀÌ¸§ÀÌ °¡ÀÔÇÑ È¸¿ø Áß¿¡ ÀÖ´ÂÁö È®ÀÎ
-				// ÀÖ´Ù¸é ¾ÆÀÌµğ Ãâ·Â
-				// ¾ø´Ù¸é "°èÁ¤ Á¤º¸°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù." Ãâ·Â
-				exist = 0;
+				// ì…ë ¥ë°›ì€ ì´ë¦„ì´ ê°€ì…í•œ íšŒì› ì¤‘ì— ìˆëŠ”ì§€ í™•ì¸
+				// ìˆë‹¤ë©´ ì•„ì´ë”” ì¶œë ¥
+				// ì—†ë‹¤ë©´ "ê³„ì • ì •ë³´ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤." ì¶œë ¥
+				exist = FALSE;
 				for (int i = 0; i < 3; i++) {
 					if (strcmp(nameList[i], name) == 0) {
 						printf("Your ID is [%s]\n", idList[i]);
-						exist = 1;
+						exist = TRUE;
 					}
 				}
 				if (!exist) {
@@ -280,20 +296,20 @@ int main() {
 
 				break;
 
-			case 4:
+			case FIND_PW:
 				printf("\n<< Find your PW >>\n");
-				// id¸¦ ÀÔ·Â¹Ş´Â´Ù
+				// idë¥¼ ì…ë ¥ë°›ëŠ”ë‹¤
 				printf("Enter your ID => ");
 				scanf_s("%s", id, 10);
 
-				// ÀÔ·Â¹ŞÀº id°¡ °¡ÀÔÇÑ È¸¿ø Áß¿¡ ÀÖ´ÂÁö È®ÀÎ
-				// ÀÖ´Ù¸é pw Ãâ·Â
-				// ¾ø´Ù¸é "°èÁ¤ Á¤º¸°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù." Ãâ·Â
-				exist = 0;
+				// ì…ë ¥ë°›ì€ idê°€ ê°€ì…í•œ íšŒì› ì¤‘ì— ìˆëŠ”ì§€ í™•ì¸
+				// ìˆë‹¤ë©´ pw ì¶œë ¥
+				// ì—†ë‹¤ë©´ "ê³„ì • ì •ë³´ê°€ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤." ì¶œë ¥
+				exist = FALSE;
 				for (int i = 0; i < 3; i++) {
 					if (strcmp(idList[i], id) == 0) {
 						printf("Your password is [%s]\n", pwList[i]);
-						exist = 1;
+						exist = TRUE;
 					}
 				}
 				if (!exist) {
@@ -302,9 +318,9 @@ int main() {
 
 				break;
 
-			case 5:
+			case END:
 				printf("\nLeave this program.\n");
-				running = 0;	// running º¯¼ö´Â whileÀÇ Á¶°Ç½Ä¿¡¼­ »ç¿ëÇÏ¹Ç·Î 0À» ÀúÀåÇÑ°Ô ¾Æ´Ï¶ó false¸¦ ÀúÀåÇÑ °Í
+				running = FALSE;	// running ë³€ìˆ˜ëŠ” whileì˜ ì¡°ê±´ì‹ì—ì„œ ì‚¬ìš©í•˜ë¯€ë¡œ 0ì„ ì €ì¥í•œê²Œ ì•„ë‹ˆë¼ falseë¥¼ ì €ì¥í•œ ê²ƒ
 				break;
 
 			default:
